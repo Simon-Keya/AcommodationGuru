@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useState } from "react";
-import { siteConfig, getWhatsAppUrl } from "@/lib/site-config";
+import { getWhatsAppUrl } from "@/lib/site-config";
 const nav = [{label:"Home",href:"/"},{label:"Properties",href:"/properties"},{label:"About",href:"/about"},{label:"Contact",href:"/contact"}];
 export function SiteHeader(){
  const [open,setOpen]=useState(false);
