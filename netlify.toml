@@ -1,8 +1,0 @@
-# Use this file at the Git repository root when the Next.js app is in accommodation-guru/.
-[build]
-  base = "accommodation-guru"
-  command = "npm run build"
-  publish = ".next"
-
-[build.environment]
-  NODE_VERSION = "20"
