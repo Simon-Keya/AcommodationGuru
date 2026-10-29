@@ -31,3 +31,11 @@ npm start
 - `/properties/[id]` — Property details and enquiry options
 - `/about` — About Accommodation Guru
 - `/contact` — Contact form with WhatsApp handoff
+
+## Visual redesign notes
+
+The latest art-direction pass is documented in [`docs/HIGH_END_VISUAL_REDESIGN_PROMPT.md`](docs/HIGH_END_VISUAL_REDESIGN_PROMPT.md). It defines the premium editorial hospitality direction, image hygiene rules, responsive behavior, interaction requirements, and screenshot-based QA process.
+
+The public image assets that previously contained complete interface mockups with text have been replaced with clean property photography. The unused full-page screenshot asset has been removed. Text, navigation, labels, and calls to action are rendered as HTML/CSS, not embedded into photos.
+
+Property prices and listing content in `lib/properties.ts` are illustrative sample data; verify all property details and rates before production.
