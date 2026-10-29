@@ -1,82 +1,85 @@
 # The Accommodation Guru
 
-A responsive Next.js + TypeScript + Tailwind CSS landing site for a Kenyan accommodation enquiry service. It helps visitors explore illustrative stay concepts and prepare a guest or property-owner enquiry to review and send through WhatsApp.
+Premium landing page for a Kenyan vacation-home agency that connects travellers with private property owners.
 
-## Technology
+## Stack
 
-- Next.js 15 App Router and React 19
+- Next.js 15 (App Router)
 - TypeScript
-- Tailwind CSS 3 (with a custom editorial design system in `app/globals.css`)
-- Zod form validation
-- lucide-react icons
+- Tailwind CSS
+- Custom design system (warm ivory + deep ocean teal + soft gold)
 
-## Requirements
-
-- Node.js 20 or newer
-- npm
-
-## Install and run
+## Getting Started
 
 ```bash
 npm install
-cp .env.example .env.local
-# Edit .env.local and set the confirmed business WhatsApp number
 npm run dev
 ```
 
-Open the local URL printed by Next.js, normally `http://localhost:3000`.
+Open [http://localhost:3000](http://localhost:3000).
+
+## Key Features
+
+- Sticky header with mobile navigation
+- Art-directed hero
+- How It Works, Featured Homes, Why Us, Testimonials, Final CTA
+- Guest inquiry modal → WhatsApp
+- Owner partnership modal → WhatsApp
+- Floating WhatsApp action
+- Sample property data clearly marked
+- Accessible dialogs and skip link
+- Responsive from 360px upward
+
+## Before Launch
+
+Replace the following placeholders in `lib/site-config.ts` and content:
+
+- `whatsappNumber`
+- Email / phone
+- Real photography for hero and property cards
+- Real testimonials
+- Confirm service claims (24/7 support, verified owners, etc.)
+
+## Project Structure
+
+```
+app/
+  layout.tsx
+  page.tsx
+  globals.css
+components/
+  layout/       # header, footer
+  sections/     # page sections
+  property/     # property card
+  inquiry/      # guest & owner dialogs
+  ui/           # button primitive
+lib/
+  site-config.ts
+  properties.ts
+  utils.ts
+```
+
+## Design Direction
+
+Quiet luxury, contemporary coastal hospitality, editorial typography (Cormorant Garamond + Inter), generous white space, restrained gold accent.
 
 ## Deploy to Netlify
 
-See [`docs/NETLIFY_DEPLOYMENT.md`](docs/NETLIFY_DEPLOYMENT.md) for repository layout options, Netlify setup, and environment variables. The project includes a `netlify.toml` for deploying this directory as the repository root. The archive also includes a root-level configuration for cases where the Git repository contains the `accommodation-guru/` subdirectory.
+This project includes a `netlify.toml` configured for Next.js.
 
-Netlify's current Next.js adapter is auto-detected; the configuration does not add or pin the legacy `@netlify/plugin-nextjs` plugin. The configured build command is `npm run build`, the publish directory is `.next`, and Node.js is set to version 20. The deployment still needs to be confirmed from a real Netlify build log.
+### Option 1 – Netlify UI (easiest)
+1. Push this repo to GitHub / GitLab / Bitbucket
+2. Go to [app.netlify.com](https://app.netlify.com) → **Add new site** → **Import an existing project**
+3. Connect the repository
+4. Netlify will detect the Next.js plugin automatically
+5. Click **Deploy site**
 
-## Environment variables
-
-| Variable | Required for launch | Description |
-|---|---|---|
-| `NEXT_PUBLIC_WHATSAPP_NUMBER` | Yes, for WhatsApp handoff | Confirmed business number in international digits-only format, e.g. `2547XXXXXXXX`. Do not include `+`, spaces or punctuation. The sample value is deliberately treated as unconfigured. |
-| `NEXT_PUBLIC_SITE_URL` | Recommended | Public production origin for future metadata/deployment configuration. Replace `https://example.com` with the real site origin. |
-
-Never put secrets in `NEXT_PUBLIC_*` variables; these are exposed to browser code.
-
-## Quality commands
-
+### Option 2 – Netlify CLI
 ```bash
-npm run typecheck
-npm run lint
-npm run build
-npm start
+npm install -g netlify-cli
+netlify login
+netlify init
+netlify deploy --prod
 ```
 
-The repository does not currently include an automated test suite. Manually exercise the guest and owner inquiry flows after starting the site.
-
-## Current functionality
-
-- Responsive landing page and mobile navigation.
-- Sample accommodation cards with client-side name/location search and property-type filtering, including an empty state and clear-filters action.
-- Guest enquiry form with required fields, guest/bedroom/budget selection, date validation, check-out-after-check-in validation, and a 40-guest limit.
-- Owner partnership enquiry form with validation.
-- WhatsApp message preparation, URL encoding, copy-message fallback, and clear distinction between a prepared enquiry and a sent message.
-- Keyboard focus handling for the enquiry dialog, Escape-to-close, scroll locking, skip link, visible focus styles and reduced-motion support.
-- Locally stored SVG illustrations so the page does not depend on external property image URLs.
-
-## Before launch
-
-- **Listings are illustrative samples.** The four property names, locations, bedroom counts, prices and availability are not verified inventory. Replace them with approved, accurate data.
-- **Images are illustrations, not property photography.** Replace with licensed/approved images for real listings and update alt text accordingly.
-- **Testimonials are placeholders.** Replace them with genuine, permissioned feedback or remove the section before publishing.
-- **WhatsApp is not configured by default.** Set `NEXT_PUBLIC_WHATSAPP_NUMBER` to the business's confirmed number. The sample number is disabled as a handoff target; visitors can still copy the prepared message.
-- **No live booking or backend exists.** Enquiries are prepared in the browser; this project does not persist them, check live availability, take payment, verify owners, or confirm reservations. The user must review and press Send in WhatsApp.
-- **Contact details and production domain are not confirmed.** Add the real email, phone and domain when provided.
-- **Search filters sample data only.** They are not connected to an inventory API.
-- Metadata currently disables search indexing by default. Review `app/layout.tsx` and enable indexing only after the real domain and launch content are confirmed.
-
-## Visual direction
-
-The reference-aligned visual refinement is documented in [`docs/MASTER_UI_IMPLEMENTATION_PROMPT.md`](docs/MASTER_UI_IMPLEMENTATION_PROMPT.md). It defines the ivory/ocean-teal/sand/gold palette, editorial typography, compact navigation, image-led hero, property-card grid, enquiry-first behavior, responsive rules, and honest verification requirements. The existing local SVGs remain illustrative artwork, not real property photographs.
-
-## Visual and browser verification
-
-A successful compile is not a substitute for browser testing. Test desktop and mobile layouts, navigation, filter states, invalid form submissions, dates, copy fallback, and the configured WhatsApp handoff before launch. See the delivery report for the checks actually run in the supplied environment.
+The official `@netlify/plugin-nextjs` handles App Router, SSR, and image optimization.
