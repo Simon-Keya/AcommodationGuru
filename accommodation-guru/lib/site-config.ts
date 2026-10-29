@@ -1,14 +1,14 @@
 export const siteConfig = {
-  name: "The Accommodation Guru",
-  tagline: "Exceptional private homes in Kenya",
+  name: "Accommodation Guru",
+  tagline: "Better Stays. Greater Experiences.",
   whatsappNumber: "254700000000", // REPLACE BEFORE LAUNCH
   email: "hello@theaccommodationguru.com", // PLACEHOLDER
   phone: "+254 700 000 000", // PLACEHOLDER
   nav: [
-    { label: "How It Works", href: "#how-it-works" },
-    { label: "Homes", href: "#homes" },
-    { label: "Why Us", href: "#why-us" },
-    { label: "Testimonials", href: "#testimonials" },
+    { label: "Home", href: "/" },
+    { label: "Properties", href: "/properties" },
+    { label: "About", href: "/about" },
+    { label: "Contact", href: "/contact" },
   ],
 } as const;
 

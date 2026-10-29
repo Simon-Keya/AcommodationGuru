@@ -1,37 +1,16 @@
-# Netlify deployment guide
+# Netlify deployment
 
-This project uses Next.js 15 App Router. Netlify's current Next.js adapter supports the App Router and is detected automatically; this configuration intentionally does not pin the legacy `@netlify/plugin-nextjs` plugin.
+This project uses Next.js App Router. Netlify's current Next.js adapter is automatically detected; this project intentionally does not pin the legacy `@netlify/plugin-nextjs` plugin.
 
-## Choose the repository layout you will deploy
+## Repository layout
 
-### Option A — the Git repository contains the `accommodation-guru/` folder
+- If this folder (`accommodation-guru/`) is itself the repository root, keep `netlify.toml` next to `package.json` and leave Netlify's Base directory blank.
+- If the Git repository contains this folder as a subdirectory, use the repository-root `netlify.toml` included alongside this folder. It sets `base = "accommodation-guru"`.
 
-Keep the outer `netlify.toml` at the repository root. It sets `base = "accommodation-guru"`, then runs the build from that directory. In Netlify, leave the Base directory, Build command, and Publish directory fields unset/auto-detected if possible so the committed TOML is authoritative. If the UI has a conflicting saved override, clear it.
+The build command is `npm run build`; the publish directory is `.next`; Node.js is set to version 20. Confirm the latest deploy serves `/`, `/properties`, `/about`, and `/contact` after deployment.
 
-### Option B — `accommodation-guru/` itself is the Git repository root (recommended)
+## Production setup to verify
 
-Use the `accommodation-guru/netlify.toml` file at the root of that repository. Do not set a Base directory in Netlify. The build command is `npm run build` and the publish directory is `.next`.
-
-Do not set the Base directory to `accommodation-guru` when the repository root already is the app directory; that would point to a non-existent nested directory.
-
-## Environment variables
-
-In Netlify, open **Project configuration → Environment variables** and add:
-
-- `NEXT_PUBLIC_WHATSAPP_NUMBER`: the real business WhatsApp number in international digits-only format (for example, `2547XXXXXXXX`, replacing it with the actual confirmed number).
-- `NEXT_PUBLIC_SITE_URL`: the real public site origin, such as `https://your-domain.example`, after the domain is known.
-
-Do not commit `.env.local` or credentials. `NEXT_PUBLIC_*` variables are embedded in browser-visible code and must not contain secrets. Trigger a new deploy after changing build-time environment variables.
-
-## Deploy steps
-
-1. Push the selected repository layout to GitHub/GitLab/Bitbucket.
-2. In Netlify, choose **Add new project → Import an existing project** and connect the repository.
-3. Ensure Netlify detects Next.js. Use `npm run build` and `.next` if values must be entered manually.
-4. Add the environment variables above; do not invent a WhatsApp number.
-5. Deploy and review the complete build log.
-6. Test the homepage, navigation, filters, inquiry validation and WhatsApp fallback on the deployed URL.
-
-## Important
-
-The build and live deployment have not been verified in this environment because dependency installation previously timed out. A successful Netlify deploy still needs to be confirmed in the Netlify build log. Property listings and illustrations are sample content; there is no live availability service or booking persistence backend.
+- Replace placeholder phone, email and WhatsApp details in `lib/site-config.ts`.
+- Current property inventory is sample content in `lib/properties.ts`.
+- Inquiry forms open WhatsApp and do not write to a backend database.

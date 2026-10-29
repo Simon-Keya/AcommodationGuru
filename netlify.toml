@@ -1,0 +1,8 @@
+# For a Git repository that contains the app inside accommodation-guru/.
+[build]
+  base = "accommodation-guru"
+  command = "npm run build"
+  publish = ".next"
+
+[build.environment]
+  NODE_VERSION = "20"
