@@ -1,0 +1,10 @@
+# Netlify config when the Git repository contains the accommodation-guru/ subdirectory.
+# If you instead make accommodation-guru/ itself the repository root, use its netlify.toml.
+
+[build]
+  base = "accommodation-guru"
+  command = "npm run build"
+  publish = ".next"
+
+[build.environment]
+  NODE_VERSION = "20"

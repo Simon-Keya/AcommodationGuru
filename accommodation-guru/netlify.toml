@@ -1,0 +1,10 @@
+# Accommodation Guru — Netlify configuration
+# Place this file in the same directory as package.json.
+# Netlify's current Next.js adapter is detected automatically; do not pin the legacy plugin.
+
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[build.environment]
+  NODE_VERSION = "20"
