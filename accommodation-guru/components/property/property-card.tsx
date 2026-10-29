@@ -11,24 +11,24 @@ type Props = {
 
 export function PropertyCard({ property, onInquire }: Props) {
   return (
-    <article className="group flex flex-col bg-white rounded-xl overflow-hidden shadow-soft border border-border/50 hover:shadow-card transition-all duration-300">
-      <div className="relative aspect-[16/10] overflow-hidden">
+    <article className="group flex flex-col bg-white rounded-xl overflow-hidden border border-border/40 shadow-soft hover:shadow-card transition-all duration-300">
+      <div className="relative aspect-[4/3] overflow-hidden bg-sand/30">
         <Image
           src={property.image}
           alt={property.name}
           fill
-          className="object-cover transition-transform duration-500 group-hover:scale-105"
+          className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
         />
         <div className="absolute top-3 right-3">
-          <span className="inline-flex items-center px-2.5 py-1 rounded-full bg-white/95 text-[11px] font-medium tracking-wide text-charcoal/70 border border-sand/60">
+          <span className="inline-flex items-center px-2.5 py-1 rounded-full bg-white/95 backdrop-blur-sm text-[10px] font-medium tracking-wider uppercase text-charcoal/60 border border-white/50">
             Sample
           </span>
         </div>
       </div>
 
-      <div className="flex flex-col flex-1 p-5 sm:p-6">
-        <h3 className="font-serif text-xl text-charcoal group-hover:text-ocean transition-colors">
+      <div className="flex flex-col flex-1 p-5">
+        <h3 className="font-serif text-lg sm:text-xl text-charcoal leading-snug group-hover:text-ocean transition-colors">
           {property.name}
         </h3>
         <p className="mt-1.5 text-sm text-muted-foreground flex items-center gap-1.5">
@@ -38,25 +38,25 @@ export function PropertyCard({ property, onInquire }: Props) {
           </svg>
           {property.location}
         </p>
-        <div className="mt-3 flex items-center gap-3 text-sm text-charcoal/80">
-          <span className="flex items-center gap-1.5">
-            <svg className="w-3.5 h-3.5 text-gold" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
-            </svg>
-            {property.bedrooms} Bedrooms
-          </span>
-          <span className="text-border">|</span>
+
+        <div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-charcoal/75">
+          <span>{property.bedrooms} Bedrooms</span>
+          <span className="text-border">·</span>
           <span className="text-muted-foreground text-xs">{property.view}</span>
         </div>
-        <p className="mt-2 text-sm font-medium text-ocean">{property.priceRange}</p>
-        <div className="mt-5">
+
+        <p className="mt-2.5 text-sm font-medium text-ocean">
+          {property.priceRange}
+        </p>
+
+        <div className="mt-5 pt-1">
           <Button
             variant="primary"
             size="sm"
-            className="w-full"
+            className="w-full rounded-md"
             onClick={() => onInquire(property)}
           >
-            Inquire →
+            Inquire
           </Button>
         </div>
       </div>

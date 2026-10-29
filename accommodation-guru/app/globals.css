@@ -3,25 +3,24 @@
 @tailwind utilities;
 
 :root {
-  /* Brand palette */
-  --warm-ivory: #FBF8F3;
-  --sand: #E9DCC6;
-  --soft-gold: #C9A66B;
-  --deep-ocean: #0F3D44;
-  --charcoal: #1E2A2D;
-  --mist: #EEF3F2;
+  /* Refined palette matching visual references */
+  --warm-ivory: #FBF8F1;
+  --sand: #EFE3CD;
+  --soft-gold: #C99A3B;
+  --deep-ocean: #073F46;
+  --charcoal: #203437;
+  --mist: #F5F2EB;
   --white: #FFFFFF;
+  --muted: #5C6B6E;
 
-  /* Semantic tokens */
   --background: var(--warm-ivory);
   --foreground: var(--charcoal);
-  --muted: #6B7A7E;
-  --muted-foreground: #5A6A6E;
-  --border: #E5DDD0;
+  --muted-foreground: #5C6B6E;
+  --border: #E8DFD0;
   --primary: var(--deep-ocean);
   --primary-foreground: var(--white);
   --accent: var(--soft-gold);
-  --accent-foreground: var(--charcoal);
+  --accent-foreground: #1a1a1a;
   --card: var(--white);
   --card-foreground: var(--charcoal);
   --ring: var(--deep-ocean);
@@ -57,7 +56,7 @@
   }
 
   .section-padding {
-    @apply py-16 sm:py-20 lg:py-28;
+    @apply py-16 sm:py-20 lg:py-24;
   }
 }
 
@@ -65,7 +64,6 @@
   html {
     scroll-behavior: auto;
   }
-
   *,
   *::before,
   *::after {

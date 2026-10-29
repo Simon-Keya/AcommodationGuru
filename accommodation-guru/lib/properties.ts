@@ -18,7 +18,7 @@ export const sampleProperties: SampleProperty[] = [
     priceRange: "From KSh 45,000 – 75,000 / night",
     image: "/images/diani.jpg",
     description: "Oceanfront villa with private pool and direct beach access.",
-    view: "Ocean / Lake / Hillside View",
+    view: "Ocean View",
   },
   {
     id: "karen-hillside-villa",
