@@ -7,7 +7,7 @@ import { SiteFooter } from "@/components/layout/site-footer";
 import { GuestInquiryDialog } from "@/components/inquiry/guest-inquiry-dialog";
 import { OwnerInquiryDialog } from "@/components/inquiry/owner-inquiry-dialog";
 import { sampleProperties, type SampleProperty } from "@/lib/properties";
-import { siteConfig, getWhatsAppUrl } from "@/lib/site-config";
+import { getWhatsAppUrl } from "@/lib/site-config";
 
 function Pin(){return <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg>}
 function Bed(){return <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7"><path d="M3 20V5m0 10h18v5M3 10h18v5M7 10V7h5v3m2 0V7h5v3"/></svg>}
