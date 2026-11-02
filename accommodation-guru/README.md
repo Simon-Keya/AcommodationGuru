@@ -1,41 +1,54 @@
-# Accommodation Guru
+# The Accommodation Guru
 
-A responsive accommodation discovery and enquiry website built with Next.js App Router, React, TypeScript and Tailwind CSS.
+A premium, responsive hospitality marketing and enquiry website built with Next.js App Router, React, TypeScript and Tailwind CSS.
 
-## Development
+## Local development
 
 ```bash
-npm install
+npm ci
 npm run dev
 ```
 
-## Production check
+## Production validation
 
 ```bash
+npx tsc --noEmit
+npx eslint .
 npm run build
 npm start
 ```
 
-## Netlify
+## Website role and functionality
 
-- If the Git repository contains this project in an `accommodation-guru/` subfolder, use the `netlify.toml` at the repository root (included in the ZIP root).
-- If this project folder itself is the Git repository root, use this folder's `netlify.toml` and leave Netlify's Base directory unset.
-- Netlify should auto-detect its current Next.js adapter; no legacy `@netlify/plugin-nextjs` entry is required.
-- Replace `whatsappNumber`, `email`, and `phone` in `lib/site-config.ts` before production.
-- Property inventory and rates are sample content. Enquiry is not a live booking or availability confirmation.
+The website introduces The Accommodation Guru, presents the agency's approach, and collects guest and property-owner enquiries. Enquiries are prepared as WhatsApp messages. Visitors must review and send those messages in WhatsApp; the website does not automatically deliver messages, confirm availability, create reservations or process payments.
+
+The latest client content document is the source of truth for the public-facing homepage copy. See `docs/CLIENT_CONTENT_MAPPING.md` for the mapping and outstanding client confirmations.
 
 ## Routes
 
-- `/` — Homepage
-- `/properties` — Property discovery and filters
-- `/properties/[id]` — Property details and enquiry options
-- `/about` — About Accommodation Guru
-- `/contact` — Contact form with WhatsApp handoff
+- `/` — Homepage and primary guest/owner enquiry dialogs
+- `/properties` — Catalogue introduction and enquiry path; no unverified sample listings are published
+- `/properties/[id]` — Reserved for future verified property detail pages (currently returns not found)
+- `/about` — Agency approach
+- `/contact` — Business contact details and WhatsApp enquiry hand-off
 
-## Visual redesign notes
+## Contact configuration
 
-The latest art-direction pass is documented in [`docs/HIGH_END_VISUAL_REDESIGN_PROMPT.md`](docs/HIGH_END_VISUAL_REDESIGN_PROMPT.md). It defines the premium editorial hospitality direction, image hygiene rules, responsive behavior, interaction requirements, and screenshot-based QA process.
+Update `lib/site-config.ts` to change the central WhatsApp, phone, email and navigation configuration. Current values were taken from the supplied client content. Confirm the WhatsApp number with the client before launch.
 
-The public image assets that previously contained complete interface mockups with text have been replaced with clean property photography. The unused full-page screenshot asset has been removed. Text, navigation, labels, and calls to action are rendered as HTML/CSS, not embedded into photos.
+## Client inputs required before launch
 
-Property prices and listing content in `lib/properties.ts` are illustrative sample data; verify all property details and rates before production.
+- Approved logo and brand assets
+- Verified property names, descriptions, images, amenities, guest capacity, rates and availability details
+- Confirmation of the owner-verification process behind the “Verified Owners” claim
+- Official Instagram, Facebook and TikTok profile URLs/handles
+- Approved privacy/legal wording
+- Confirmation of the WhatsApp destination
+
+## Deployment
+
+The archive includes Netlify configuration. Confirm the intended repository/base-directory arrangement in Netlify before deploying. Do not treat the website as a booking engine or payment platform in marketing or deployment descriptions.
+
+## Technical caution
+
+Keep the current Next.js 15 baseline while reviewing dependency advisories. Do not use `npm audit fix --force` or perform an unreviewed major upgrade. See `docs/VERIFICATION.md` for the test checklist and current validation limitation.

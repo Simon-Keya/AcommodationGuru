@@ -1,36 +1,62 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { useMemo, useState } from "react";
-import { SiteHeader } from "@/components/layout/site-header";
-import { SiteFooter } from "@/components/layout/site-footer";
+import { useState } from "react";
 import { GuestInquiryDialog } from "@/components/inquiry/guest-inquiry-dialog";
 import { OwnerInquiryDialog } from "@/components/inquiry/owner-inquiry-dialog";
-import { sampleProperties, type SampleProperty } from "@/lib/properties";
-import { getWhatsAppUrl } from "@/lib/site-config";
+import { SiteFooter } from "@/components/layout/site-footer";
+import { SiteHeader } from "@/components/layout/site-header";
 
-function Pin(){return <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg>}
-function Bed(){return <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7"><path d="M3 20V5m0 10h18v5M3 10h18v5M7 10V7h5v3m2 0V7h5v3"/></svg>}
-export default function HomePage(){
- const [guestOpen,setGuestOpen]=useState(false);const [ownerOpen,setOwnerOpen]=useState(false);const [selected,setSelected]=useState<SampleProperty|null>(null);const [location,setLocation]=useState("");const [kind,setKind]=useState("All Types");const [checkIn,setCheckIn]=useState("");const [checkOut,setCheckOut]=useState("");const [favorites,setFavorites]=useState<string[]>([]);
- const filtered=useMemo(()=>sampleProperties.filter(p=>(!location||`${p.name} ${p.location}`.toLowerCase().includes(location.toLowerCase()))&&(kind==="All Types"||p.type===kind)),[location,kind]);
- const inquire=(p?:SampleProperty)=>{setSelected(p??null);setGuestOpen(true)};
- const search=()=>{document.getElementById("homes")?.scrollIntoView({behavior:"smooth"})};
- return <><SiteHeader/><main id="main-content">
-  <section className="home-hero"><div className="hero-photo"/><div className="hero-content"><div className="eyebrow">Discover your perfect stay</div><h1>Exceptional<br/>Accommodation<br/>Experiences</h1><p>Find the perfect place to stay, whether it’s a relaxing getaway, a business trip or a long-term stay.</p></div></section>
-  <form className="search-panel" onSubmit={e=>{e.preventDefault();search()}}>
-   <div className="search-field"><label htmlFor="location-search">Location or property</label><input id="location-search" value={location} onChange={e=>setLocation(e.target.value)} placeholder="e.g. Nairobi, Beach, Villa"/></div>
-   <div className="search-field"><label htmlFor="property-type">Property type</label><select id="property-type" value={kind} onChange={e=>setKind(e.target.value)}><option>All Types</option><option>Villa</option><option>Apartment</option><option>Lodge</option><option>Guest House</option></select></div>
-   <div className="search-field"><label htmlFor="check-in">Check-in</label><input id="check-in" type="date" value={checkIn} onChange={e=>setCheckIn(e.target.value)} aria-label="Check-in date"/></div>
-   <div className="search-field"><label htmlFor="check-out">Check-out</label><input id="check-out" type="date" min={checkIn||undefined} value={checkOut} onChange={e=>setCheckOut(e.target.value)} aria-label="Check-out date"/></div>
-   <button className="search-submit" type="submit">Search stays <span aria-hidden="true">→</span></button>
-  </form>
-  <section id="homes" className="featured-wrap"><div className="container-page"><div className="section-heading-row"><div><h2 className="section-heading">Featured Properties</h2><p className="section-subtitle">Handpicked accommodations for an unforgettable stay</p></div><Link className="text-link" href="/properties">View All&nbsp; →</Link></div>
-   <div className="property-grid">{filtered.slice(0,3).map((p,i)=><article className="property-card" key={p.id}><div className="property-image"><Link className="property-image-link" href={`/properties/${p.id}`} aria-label={`View ${p.name}`}><Image src={p.image} alt={p.name} fill sizes="(max-width:760px) 50vw, 33vw" priority={i===0}/></Link><span className="property-badge">{p.type}</span><button className="favorite-button" aria-label={favorites.includes(p.id)?"Remove from favorites":"Add to favorites"} onClick={()=>setFavorites(f=>f.includes(p.id)?f.filter(x=>x!==p.id):[...f,p.id])}>{favorites.includes(p.id)?"♥":"♡"}</button></div><div className="property-body"><h3><Link href={`/properties/${p.id}`}>{p.name}</Link></h3><p className="property-location"><Pin/>{p.location}</p><p className="property-price">KSh {p.price.toLocaleString()}<small> / night</small></p><div className="property-meta"><span>{p.guests} guests</span><span><Bed/> {p.bedrooms} bedrooms</span><span>{p.bathrooms} bathrooms</span></div><button className="card-inquire" onClick={()=>inquire(p)}>Enquire about stay</button></div></article>)}</div>
-   {filtered.length===0&&<div className="no-results">No sample properties match that search. Try another location or select All Types.</div>}
-  </div></section>
-  <section className="below-section"><div className="container-page below-grid"><div className="below-photo"><Image src="/images/naivasha.jpg" alt="A tranquil lakeside holiday home in Kenya" width={900} height={620}/></div><div className="below-copy"><div className="eyebrow" style={{color:"#b98522"}}>Stay somewhere special</div><h2>Find a place that feels like yours.</h2><p>From coastal escapes to peaceful countryside retreats, Accommodation Guru helps you discover thoughtfully selected places to stay across Kenya. Tell us what you need and our team can help you find a stay that fits.</p><a className="gold-button" href={getWhatsAppUrl("Hello, please help me find the right accommodation.")}>Let us help you find a stay</a></div></div></section>
-  <section className="section-padding"><div className="container-page"><div className="section-heading-row"><div><h2 className="section-heading">A better way to find your stay</h2><p className="section-subtitle">Personal support from first enquiry to check-in.</p></div></div><div className="value-grid"><article><span>01</span><h3>Tell us what you need</h3><p>Share your destination, dates, group size and the kind of stay you have in mind.</p></article><article><span>02</span><h3>Explore handpicked homes</h3><p>Review suitable options and ask questions before choosing your accommodation.</p></article><article><span>03</span><h3>Enquire with confidence</h3><p>Connect with our team to discuss details and confirm arrangements directly.</p></article></div></div></section>
-  <section className="final-strip"><div className="container-page final-strip-inner"><div><p className="eyebrow">Your next getaway starts here</p><h2>Ready to find your perfect stay?</h2></div><button className="gold-button" onClick={()=>inquire()}>Send an Enquiry</button></div></section>
- </main><SiteFooter/><a className="floating-whatsapp" href={getWhatsAppUrl("Hello, I'd like to enquire about a stay with The Accommodation Guru.")} target="_blank" rel="noreferrer" aria-label="Chat on WhatsApp">✆</a><GuestInquiryDialog open={guestOpen} onClose={()=>setGuestOpen(false)} preselected={selected}/><OwnerInquiryDialog open={ownerOpen} onClose={()=>setOwnerOpen(false)}/></>
+const steps = [
+  { n: "01", image: "/images/generated-step-coast.jpg", imageAlt: "A guest browsing holiday accommodation on a laptop from a tropical terrace", title: "Tell Us What You're Looking For", body: "Share your destination, preferred dates, number of guests and the kind of experience you're looking for." },
+  { n: "02", image: "/images/generated-step-country.jpg", imageAlt: "A bright, comfortable tropical villa bedroom with garden views", title: "We Find Your Perfect Match", body: "We help you explore suitable properties and connect with the respective owners to discuss availability and booking arrangements." },
+  { n: "03", image: "/images/generated-step-sunset.jpg", imageAlt: "A family enjoying a relaxing stay together at a tropical coastal villa", title: "Enjoy Your Getaway", body: "Finalize your booking, prepare for your trip and look forward to an enjoyable stay in a space that feels like home." },
+];
+const benefits = [
+  { n: "01", title: "Personalized Property Matching", body: "We take time to understand your travel needs, preferences and budget before helping you identify suitable accommodation." },
+  { n: "02", title: "Curated Property Selection", body: "Discover a selection of holiday homes and private accommodation suited to different travel experiences and budgets." },
+  { n: "03", title: "Direct Owner Communication", body: "We connect you with property owners to discuss availability, pricing, property details and booking arrangements." },
+  { n: "04", title: "Dedicated Booking Assistance", body: "From your initial inquiry to coordinating your booking, we're here to make finding your next stay easier." },
+];
+export default function HomePage() {
+  const [guestOpen, setGuestOpen] = useState(false);
+  const [ownerOpen, setOwnerOpen] = useState(false);
+  return <>
+    <SiteHeader onGuest={() => setGuestOpen(true)} onOwner={() => setOwnerOpen(true)} />
+    <main id="main-content">
+      <section className="guru-hero">
+        <Image src="/images/hero-coastal-villa.webp" alt="A private tropical coastal villa with an ocean-facing pool and palm-fringed terrace" fill priority sizes="100vw" className="guru-hero-image" />
+        <div className="guru-hero-shade" />
+        <div className="guru-hero-content container-page">
+          <p className="guru-eyebrow">Exceptional stays across Kenya</p>
+          <h1>Find Your Perfect<br/><em>Home Away From Home</em></h1>
+          <p className="guru-hero-copy">Discover exceptional holiday homes, private villas, beautiful cottages and exclusive short-stay apartments across Kenya. Whether you're planning a relaxing coastal escape, a romantic getaway, a family holiday, corporate stay, or a weekend retreat, The Accommodation Guru connects you with spaces that make every stay memorable.</p>
+          <div className="guru-actions"><button type="button" className="guru-button guru-button-gold" aria-haspopup="dialog" aria-label="Find Your Stay — open guest enquiry form" onClick={() => setGuestOpen(true)}>Find Your Stay <span aria-hidden="true">↗</span></button><button className="guru-button guru-button-outline" onClick={() => setOwnerOpen(true)}>List Your Property</button></div>
+          <div className="guru-trust"><span>Verified Owners</span><i/> <span>Personalized Matching</span><i/> <span>Dedicated Booking Assistance</span></div>
+          
+        </div>
+        <div className="guru-hero-index"><span>01</span><span className="guru-index-line"/><span>KENYA · STAYS</span></div>
+      </section>
+
+      <section className="guru-intro-band"><div className="container-page guru-intro-inner"><p>THE ART OF GETTING AWAY</p><h2>Beautiful places.<br/><em>Memorable moments.</em></h2><span>From the coast to the countryside, let the right stay shape your next escape.</span></div></section>
+
+      <section id="how-it-works" className="guru-section guru-how"><div className="container-page"><div className="guru-section-heading"><p className="guru-kicker">A simpler way to stay</p><h2>Your Perfect Stay,<br/><em>Made Simple.</em></h2><p>Finding the right holiday accommodation shouldn't be complicated. We make the process easy by connecting you with suitable property owners and helping you find a space that matches your preferences, budget and travel plans.</p></div>
+        <div className="guru-steps">{steps.map((s,i)=><article className="guru-step" key={s.n}><div className="guru-step-image"><Image src={s.image} alt={s.imageAlt} fill sizes="(max-width:760px) 100vw, 30vw"/></div><div className="guru-step-top"><span>{s.n}</span><span className="guru-step-mark" aria-hidden="true">{i===0?"⌖":i===1?"✳":"↗"}</span></div><h3>{s.title}</h3><p>{s.body}</p></article>)}</div>
+        <div className="guru-center-action"><button className="guru-button guru-button-dark" onClick={() => setGuestOpen(true)}>Start Finding Your Stay <span>↗</span></button></div>
+      </div></section>
+
+      <section id="homes" className="guru-featured"><div className="container-page"><div className="guru-featured-head"><div><p className="guru-kicker">Places to make memories</p><h2>Explore Our <em>Featured Getaways</em></h2><p>From breathtaking beachfront villas to peaceful countryside retreats, discover beautiful spaces designed to make your next escape extraordinary. Explore some of the properties available through The Accommodation Guru.</p></div><span className="guru-featured-count">01 <i/> 03</span></div>
+        <div className="guru-image-trio"><article className="guru-image-card guru-image-large"><Image src="/images/favorite-coastal-villa.jpg" alt="A private coastal villa with a swimming pool and ocean views" fill sizes="(max-width:760px) 100vw, 55vw"/><div><span>01 / COASTAL ESCAPES</span><h3>By the water</h3></div></article><article className="guru-image-card"><Image src="/images/favorite-stone-cottage.jpg" alt="A stone cottage set in a landscaped garden" fill sizes="(max-width:760px) 100vw, 35vw"/><div><span>02 / PRIVATE RETREATS</span><h3>Find your quiet</h3></div></article><article className="guru-image-card"><Image src="/images/favorite-garden-retreat.jpg" alt="A landscaped garden retreat with outdoor seating and a swimming pool" fill sizes="(max-width:760px) 100vw, 35vw"/><div><span>03 / OPEN SPACES</span><h3>Room to unwind</h3></div></article></div>
+        <p className="guru-image-note">Photography shown for inspiration. Specific property listings, details, rates and availability are shared on enquiry and must be confirmed with the property owner.</p>
+        <div className="guru-center-action"><Link className="guru-button guru-button-dark" href="/properties">Explore All Properties <span>↗</span></Link></div>
+      </div></section>
+
+      <section id="why-us" className="guru-why"><div className="container-page guru-why-grid"><div className="guru-why-visual"><Image src="/images/why-us-lakeside-retreat.webp" alt="A welcoming lakeside retreat surrounded by lush gardens and tranquil water" fill sizes="(max-width:760px) 100vw, 48vw"/><div className="guru-why-caption"><span>THE ACCOMMODATION GURU</span><strong>Stay well.<br/>Travel beautifully.</strong></div></div><div className="guru-why-copy"><p className="guru-kicker">The difference is personal</p><h2>More Than Accommodation.<br/><em>An Experience Worth Remembering.</em></h2><p className="guru-why-intro">We believe every great holiday begins with finding the right place to stay. That's why we take a personalized approach to helping you discover accommodation that suits your needs.</p><div className="guru-benefits">{benefits.map(b=><article key={b.n}><span>{b.n}</span><div><h3>{b.title}</h3><p>{b.body}</p></div></article>)}</div></div></div></section>
+
+      <section className="guru-final"><Image src="/images/hero.jpg" alt="A quiet beachfront retreat with palms, soft sand and ocean views" fill sizes="100vw"/><div className="guru-final-overlay"/><div className="container-page guru-final-content"><p className="guru-kicker">Your next chapter starts here</p><h2>Ready to Find<br/><em>Your Next Escape?</em></h2><p>Your next unforgettable getaway is closer than you think. Whether you're searching for a peaceful weekend retreat, a family holiday home or a luxurious private villa, let The Accommodation Guru help you find the perfect place.</p><div className="guru-actions"><button className="guru-button guru-button-gold" onClick={() => setGuestOpen(true)}>Start Your Search <span>↗</span></button><button className="guru-button guru-button-outline" onClick={() => setOwnerOpen(true)}>Partner With Us as an Owner</button></div></div></section>
+    </main>
+    <SiteFooter />
+    <GuestInquiryDialog open={guestOpen} onClose={() => setGuestOpen(false)} />
+    <OwnerInquiryDialog open={ownerOpen} onClose={() => setOwnerOpen(false)} />
+  </>;
 }

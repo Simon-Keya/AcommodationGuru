@@ -17,13 +17,13 @@ const sans = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "The Accommodation Guru | Exceptional Private Homes in Kenya",
+  title: "The Accommodation Guru | Find Your Perfect Home Away From Home",
   description:
-    "We connect discerning travelers with exceptional private homes, villas, cottages and beach houses across Kenya. Personalized matching and booking support.",
+    "Discover exceptional holiday homes, private villas, beautiful cottages and short-stay apartments across Kenya. Personalized matching and dedicated booking assistance.",
   openGraph: {
-    title: "The Accommodation Guru | Exceptional Private Homes in Kenya",
+    title: "The Accommodation Guru | Find Your Perfect Home Away From Home",
     description:
-      "Discover curated private vacation homes in Kenya. Personalized matching between travellers and property owners.",
+      "Find your perfect home away from home. The Accommodation Guru connects travellers with exceptional stays across Kenya.",
     type: "website",
   },
 };

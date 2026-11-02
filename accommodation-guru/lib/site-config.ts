@@ -1,18 +1,18 @@
 export const siteConfig = {
-  name: "Accommodation Guru",
-  tagline: "Better Stays. Greater Experiences.",
-  whatsappNumber: "254700000000", // REPLACE BEFORE LAUNCH
-  email: "hello@theaccommodationguru.com", // PLACEHOLDER
-  phone: "+254 700 000 000", // PLACEHOLDER
+  name: "The Accommodation Guru",
+  tagline: "Connecting you to exceptional stays and unforgettable experiences.",
+  whatsappNumber: "254112307490",
+  email: "bookings@theaccommodationguru.com",
+  phone: "0112307490",
+  location: "Kenya",
   nav: [
     { label: "Home", href: "/" },
-    { label: "Properties", href: "/properties" },
-    { label: "About", href: "/about" },
-    { label: "Contact", href: "/contact" },
+    { label: "How It Works", href: "/#how-it-works" },
+    { label: "About Us", href: "/#why-us" },
+    { label: "Contact Us", href: "/contact" },
   ],
 } as const;
 
 export function getWhatsAppUrl(message: string): string {
-  const encoded = encodeURIComponent(message);
-  return `https://wa.me/${siteConfig.whatsappNumber}?text=${encoded}`;
+  return `https://wa.me/${siteConfig.whatsappNumber}?text=${encodeURIComponent(message)}`;
 }
