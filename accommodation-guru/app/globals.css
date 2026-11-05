@@ -412,3 +412,147 @@ body{background:var(--guru-ivory);-webkit-font-smoothing:antialiased;text-render
  .guru-hero-image,.guru-why-visual img,.guru-catalogue-hero img,.guru-image-card img,.guru-button{transition:none!important;}
  .guru-button:hover,.guru-image-card:hover img,.guru-why-visual:hover img,.guru-catalogue-hero:hover img{transform:none!important;}
 }
+
+/* Responsive quality pass — November 2026 */
+html, body { max-width: 100%; overflow-x: clip; }
+img, video, svg { max-width: 100%; }
+button, a { -webkit-tap-highlight-color: transparent; }
+.container-page { min-width: 0; }
+.guru-hero, .guru-section, .guru-featured, .guru-why, .guru-final,
+.guru-footer, .guru-catalogue-hero, .guru-contact-grid { min-width: 0; }
+
+/* Keep the header composed instead of squeezing navigation on tablets. */
+@media (max-width: 1020px) {
+  .header-inner { gap: 14px; }
+  .brand { min-width: 0; flex: 0 1 auto; }
+  .desktop-nav { display: none; }
+  .header-actions { margin-left: auto; gap: 10px; }
+  .header-cta, .header-text-action { display: none; }
+  .menu-toggle { display: block; flex: 0 0 40px; width: 40px; height: 40px; }
+}
+
+/* Catalogue hero: the photograph remains clear while the copy stays readable. */
+.guru-catalogue-hero {
+  min-height: clamp(440px, 55vw, 650px);
+  height: auto;
+  align-items: center;
+  background: #153f43;
+}
+.guru-catalogue-hero > img {
+  object-fit: cover;
+  object-position: center 54%;
+  filter: saturate(.9) contrast(1.02);
+}
+.guru-catalogue-hero::before {
+  background: linear-gradient(90deg, rgba(5, 34, 38, .82) 0%, rgba(5, 34, 38, .58) 43%, rgba(5, 34, 38, .12) 100%),
+              linear-gradient(0deg, rgba(5, 34, 38, .28), transparent 62%);
+}
+.guru-catalogue-hero-content {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 1440px);
+  padding: clamp(76px, 10vw, 132px) clamp(22px, 8vw, 120px);
+}
+.guru-catalogue-hero-content .guru-kicker { color: #e7cfaa; }
+.guru-catalogue-hero-content h1 { max-width: 760px; text-wrap: balance; }
+.guru-catalogue-hero-content > p:not(.guru-kicker) { max-width: 600px; }
+.guru-catalogue-hero-note {
+  display: block;
+  margin-top: 28px;
+  color: rgba(255,255,255,.72);
+  font-size: 8px;
+  letter-spacing: .19em;
+  line-height: 1.8;
+}
+.guru-catalogue-empty { width: min(100% - 40px, 850px); }
+.guru-catalogue-empty > p:not(.guru-kicker) { max-width: 620px; }
+
+/* Fluid grids and typography across laptop, tablet and mobile widths. */
+.guru-steps, .guru-image-trio, .guru-why-grid, .guru-footer-main,
+.guru-contact-grid { min-width: 0; }
+.guru-step, .guru-image-card, .guru-footer-col, .guru-contact-details,
+.guru-contact-form-panel { min-width: 0; }
+.guru-step h3, .guru-benefits h3, .guru-image-card h3,
+.guru-footer-col a, .guru-footer-col span { overflow-wrap: anywhere; }
+.guru-dialog { width: min(94vw, 590px); max-height: min(90dvh, 820px); overflow: auto; }
+.guru-dialog-body { min-width: 0; }
+.guru-dialog-body input, .guru-dialog-body select, .guru-dialog-body textarea { min-width: 0; }
+
+@media (max-width: 900px) {
+  .guru-section, .guru-featured, .guru-why { padding-top: 76px; padding-bottom: 80px; }
+  .guru-why-grid { grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 30px; }
+  .guru-why-visual { height: 480px; }
+  .guru-footer-main { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 30px 24px; }
+  .guru-footer-brand { grid-column: 1 / -1; }
+  .guru-catalogue-hero-content { padding-left: 7vw; padding-right: 7vw; }
+}
+
+@media (max-width: 760px) {
+  .header-inner { padding-left: 16px; padding-right: 16px; }
+  .brand-mark { width: 36px; height: 36px; }
+  .guru-hero { min-height: 700px; height: auto; }
+  .guru-hero-content { padding: 100px 22px 125px; }
+  .guru-hero h1 { font-size: clamp(42px, 10vw, 58px); line-height: .99; }
+  .guru-hero-copy { max-width: 560px; font-size: 12px; line-height: 1.75; }
+  .guru-trust { margin-top: 28px; gap: 8px 11px; }
+  .guru-hero-index { right: 22px; bottom: 22px; }
+  .guru-section-heading { margin-bottom: 32px; }
+  .guru-section-heading h2, .guru-featured h2, .guru-why h2 { font-size: clamp(34px, 8vw, 43px); }
+  .guru-steps { grid-template-columns: 1fr; }
+  .guru-step { padding: 20px 0 25px; border-right: 0; }
+  .guru-step-image { height: clamp(185px, 54vw, 270px); }
+  .guru-image-trio { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .guru-image-card { min-height: 250px; }
+  .guru-image-large { grid-column: 1 / -1; min-height: 320px; }
+  .guru-why-grid { grid-template-columns: 1fr; }
+  .guru-why-visual { height: clamp(300px, 90vw, 440px); }
+  .guru-final { min-height: 590px; }
+  .guru-final-content { padding-top: 76px; padding-bottom: 76px; }
+  .guru-final h2 { font-size: clamp(44px, 11vw, 60px); }
+  .guru-footer-main { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 18px; }
+  .guru-footer-brand { grid-column: 1 / -1; }
+  .guru-footer-bottom { flex-direction: column; line-height: 1.7; }
+  .guru-catalogue-hero { min-height: 500px; }
+  .guru-catalogue-hero > img { object-position: 57% center; }
+  .guru-catalogue-hero::before { background: linear-gradient(90deg, rgba(5,34,38,.78), rgba(5,34,38,.34)), linear-gradient(0deg, rgba(5,34,38,.35), transparent 68%); }
+  .guru-catalogue-hero-content { padding: 88px 24px 76px; }
+  .guru-catalogue-hero h1 { font-size: clamp(44px, 10vw, 62px); }
+  .guru-catalogue-empty { width: auto; padding: 68px 22px 76px; }
+  .guru-contact-grid { grid-template-columns: 1fr; gap: 30px; }
+}
+
+@media (max-width: 520px) {
+  .site-header { height: 64px; }
+  .brand-name { font-size: 13px; }
+  .brand-mark { width: 33px; height: 33px; }
+  .guru-hero { min-height: 690px; }
+  .guru-hero-content { padding-top: 88px; padding-bottom: 115px; }
+  .guru-hero h1 { font-size: clamp(39px, 10.5vw, 49px); letter-spacing: -.04em; }
+  .guru-actions { display: grid; grid-template-columns: 1fr; width: min(100%, 330px); }
+  .guru-button { min-height: 46px; justify-content: center; }
+  .guru-trust { max-width: 340px; font-size: 8px; }
+  .guru-intro-band { padding: 54px 0; }
+  .guru-image-trio { grid-template-columns: 1fr; }
+  .guru-image-large, .guru-image-card { grid-column: auto; min-height: 270px; }
+  .guru-image-large { min-height: 310px; }
+  .guru-footer-main { grid-template-columns: 1fr; }
+  .guru-footer-brand { grid-column: auto; }
+  .guru-footer { padding-top: 48px; }
+  .guru-contact-form-panel { padding: 20px 16px; }
+  .guru-form-row { grid-template-columns: 1fr; }
+  .guru-dialog-head { padding: 18px 18px 14px; }
+  .guru-dialog-body { padding: 18px; }
+  .guru-catalogue-hero { min-height: 480px; }
+  .guru-catalogue-hero-content { padding-left: 21px; padding-right: 21px; }
+  .guru-catalogue-hero-note { max-width: 270px; }
+}
+
+@media (max-width: 360px) {
+  .header-inner { padding-left: 12px; padding-right: 12px; }
+  .brand { gap: 6px; }
+  .brand-name { font-size: 12px; }
+  .menu-toggle { width: 36px; height: 36px; flex-basis: 36px; }
+  .guru-hero-content { padding-left: 18px; padding-right: 18px; }
+  .guru-hero h1 { font-size: 38px; }
+  .guru-catalogue-hero-content { padding-left: 18px; padding-right: 18px; }
+}

@@ -5,6 +5,13 @@ export const metadata: Metadata = {
   title: "The Accommodation Guru | Find Your Perfect Home Away From Home",
   description:
     "Discover exceptional holiday homes, private villas, beautiful cottages and short-stay apartments across Kenya. Personalized matching and dedicated booking assistance.",
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/icon.svg", type: "image/svg+xml" },
+    ],
+    apple: "/apple-icon.png",
+  },
   openGraph: {
     title: "The Accommodation Guru | Find Your Perfect Home Away From Home",
     description:
