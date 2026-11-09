@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { FloatingWhatsApp } from "@/components/layout/floating-whatsapp";
 
 export const metadata: Metadata = {
   title: "The Accommodation Guru | Find Your Perfect Home Away From Home",
@@ -35,6 +36,7 @@ export default function RootLayout({
           Skip to content
         </a>
         {children}
+        <FloatingWhatsApp />
       </body>
     </html>
   );

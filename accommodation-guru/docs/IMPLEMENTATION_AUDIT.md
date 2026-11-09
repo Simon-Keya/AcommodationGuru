@@ -17,7 +17,7 @@
 - Added the requested premium editorial hospitality visual direction using the supplied warm ivory, sand, muted gold, deep teal and charcoal palette.
 - Used the local photography after visual inspection. The imagery is presented as inspiration, not verified property inventory.
 - Updated guest enquiry fields and WhatsApp message formatting. Added the accommodation-type choices from the client document and optional budget field.
-- Updated owner enquiry form for owner name, property type, location, bedrooms and optional property details.
+- Updated owner enquiry form for owner name, property type, location, required number of beds and required additional property information.
 - Centralized contact values in `lib/site-config.ts`.
 - Updated the footer and contact page with supplied contact details.
 - Removed sample property listings from public display pending verified listing data.
